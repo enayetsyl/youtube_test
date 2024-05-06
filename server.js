@@ -14,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 const corsOptions = {
-  origin: 'http://localhost:5173',  // Allow only this origin to access
+  origin: ['http://localhost:5173', 'https://youtube-test-fe.vercel.app'],  // Allow only this origin to access
   optionsSuccessStatus: 200     // Some legacy browsers choke on 204
 };
 
@@ -95,7 +95,7 @@ app.get('/oauth2callback', async (req, res) => {
       await newUser.save();
     }
 
-    res.redirect(`http://localhost:5173?googleId=${decoded.sub}`); // Redirect back to the frontend
+    res.redirect(`https://youtube-test-fe.vercel.app?googleId=${decoded.sub}`); // Redirect back to the frontend
   } catch (error) {
     console.error('Error retrieving access token', error);
     res.status(500).send('Authentication failed');
